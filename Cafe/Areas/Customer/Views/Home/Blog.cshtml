@@ -1,0 +1,77 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!-- Title Page -->
+<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(/Site/images/bg-title-page-03.jpg);">
+    <h2 class="tit6 t-center">
+        Blog
+    </h2>
+</section>
+
+
+<!-- Content page -->
+<section>
+
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-8 col-lg-9">
+                <div class="p-t-80 p-b-124 bo5-r p-r-50 h-full p-r-0-md bo-none-md">
+                    
+                    @await Component.InvokeAsync("Yorumlar")
+
+                    <!-- Leave a comment -->
+                    <form asp-action="Blog" class="leave-comment p-t-10" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                        <textarea asp-for="Mesaj" class="bo-rad-10 size29 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-40" placeholder="Buraya yorumunuzu yazabilirsiniz"></textarea>
+                        <span asp-validation-for="Mesaj" class="text-danger"></span>
+
+                        <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                            <input asp-for="Title" class="bo-rad-10 sizefull txt10 p-l-20" type="text" placeholder="Yorum başlığı">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                            <input asp-for="Name" class="bo-rad-10 sizefull txt10 p-l-20" type="text" placeholder="Adınız">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="size30 bo2 bo-rad-10 m-t-3 m-b-30">
+                            <input asp-for="Email" class="bo-rad-10 sizefull txt10 p-l-20" type="text" placeholder="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="size30 bo2 bo-rad-10 m-t-3 m-b-30">
+                            <label asp-for="Image">
+                                Resim Yükle
+                                <input asp-for="Image" class="bo-rad-10 sizefull txt10 p-l-20" type="file">
+                            </label>
+                        </div>
+
+                        <!-- Button3 -->
+                        <button type="submit" class="btn3 flex-c-m size31 txt11 trans-0-4">
+                            Yorumu Gönderin
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="sidebar2 p-t-80 p-b-80 p-l-20 p-l-0-md p-t-0-md">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

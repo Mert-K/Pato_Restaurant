@@ -1,0 +1,69 @@
+﻿@model Cafe.Models.Menu
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+        <h4 class="text-primary">Menü Düzenleme Sayfası</h4>
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Başlık</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Açıklama</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Fiyat</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Resim</label>
+                <input asp-for="Image" type="file" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ozel" /> @Html.DisplayNameFor(model => model.Ozel)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryID" class="control-label">Kategori</label>
+                <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-primary">Kayıt Listesine Geri Dön</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        @if (Model.Image == null)
+        {
+            <img src="~/Site/images/no-image.jpg" style="width:300px;height:250px" />
+        }
+        else
+        {
+            <img src="@Model.Image" style="width:300px;height:250px;" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
